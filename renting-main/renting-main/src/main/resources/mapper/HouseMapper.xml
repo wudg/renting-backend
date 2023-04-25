@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdg.renting.main.mapper.HouseMapper">
+
+<sql id="info_columns">
+    info.id id,
+    info.village_name villageName,
+    info.area,
+    info.price,
+    info.images,
+    info.description,
+    info.toilet,
+    info.images,
+    info.rental_method,
+    info.kitchen,
+    info.balcony,
+    info.cover,
+    detail.water_rate waterRate,
+    detail.power_rate powerRate,
+    info.create_time createTime,
+    info.update_time updateTime,
+    ( SELECT region01.`NAME` FROM nc_region region01 WHERE region01.id = detail.region_id ) address,
+    ( SELECT region02.`NAME` FROM nc_region region02 WHERE region02.id = detail.district_id ) district,
+    ( SELECT house_type.`NAME` FROM house_type WHERE house_type.id = info.house_type_id ) houseType,
+    ( SELECT subway01.NAME FROM nc_subway subway01 WHERE subway01.id = detail.subway_station_id ) subwayStation,
+    ( SELECT subway02.NAME FROM nc_subway subway02 WHERE subway02.id = detail.subway_line_id ) subwayLine
+</sql>
+
+<select id="listHousePage" resultType="com.wdg.renting.main.res.HouseResponse">
+    select
+    <include refid="info_columns"/>
+    FROM
+    house_info info
+    LEFT JOIN house_detail_info detail ON detail.house_id = info.id
+    LEFT JOIN house_type ON house_type.id = info.house_type_id
+    <where>
+        <if test="keyword != null and keyword != ''">
+            and info.village_name like concat('%',#{keyword},'%')
+        </if>
+    </where>
+    ORDER BY info.create_time desc
+</select>
+
+<select id="getHouseDetail" resultType="com.wdg.renting.main.res.HouseResponse">
+    select
+    <include refid="info_columns"/>
+    FROM
+    house_info info
+    LEFT JOIN house_detail_info detail ON detail.house_id = info.id
+    where info.id=#{id}
+</select>
+</mapper>
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdg.renting.main.mapper.NcRegionMapper">
+
+<sql id="info_columns">
+
+</sql>
+
+<select id="getParentByChildId" resultType="com.wdg.renting.main.entity.NcRegion">
+    SELECT
+    m.id,
+    m.name,
+    m.pid
+    FROM
+    (
+    SELECT
+    @id AS _id,(
+    SELECT
+    @id := pid
+    FROM
+    nc_region
+    WHERE
+    id = _id
+    )
+    FROM
+    (
+    SELECT
+    @id :=(
+    SELECT
+    pid
+    FROM
+    nc_region
+    WHERE
+    id = #{nodeId}
+    )) vm,
+    nc_region m
+    WHERE
+    @id IS NOT NULL
+    ) vm
+    INNER JOIN nc_region m
+    WHERE
+    id = vm._id
+</select>
+</mapper>
+
