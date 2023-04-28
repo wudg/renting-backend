@@ -35,7 +35,7 @@ public class HouseAddReq {
     /**
      * 出租方式0-整租 1-合租
      */
-    private Boolean rentalMethod;
+    private String rentalMethod;
 
     /**
      * 电费/度

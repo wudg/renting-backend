@@ -61,6 +61,7 @@ public class HouseServiceImpl extends BaseServiceImpl<HouseMapper, House> implem
         PageInfo<HouseResponse> pageInfo = new PageInfo<>(list);
         resultList.setTotal(pageInfo.getTotal());
         resultList.setRows(list);
+        resultList.setPages(pageInfo.getPages());
         return resultList;
     }
 

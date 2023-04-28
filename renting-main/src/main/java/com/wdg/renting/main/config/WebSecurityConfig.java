@@ -41,8 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/register", "/login", "/roles").permitAll() // 登陆、注册接口不需要认证
-                .antMatchers("/**").permitAll() // 登陆、注册接口不需要认证
+                .antMatchers("/register", "/login", "/roles").permitAll() // 登陆、注册接口不需要认证
+//                .antMatchers("/**").permitAll() // 登陆、注册接口不需要认证
                 .anyRequest().authenticated() // 其它接口需要认证
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 不使用Session

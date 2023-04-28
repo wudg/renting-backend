@@ -1,0 +1,53 @@
+# 数据库连接配置
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: -1
+      max-request-size: -1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://150.158.153.134:3306/renting?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: TW0QszeLzctF7BzFmICcafD3rDehaZ49fLMePvBAOvpBm2eiPkyDF9FKoXUu1SMUsmIB75S7yBWi8cUuV+k1tg==
+    druid:
+      #特别提示:配置数据库加密 config这个不能忘掉
+      filters: stat,wall,config
+      use-global-data-source-stat: true
+      # 开启解密config.decrypt=true; 公钥:config.decrypt.key
+      connect-properties:
+        druid.stat.mergeSql: true
+        druid.stat.slowSqlMillis: 1000
+        druid.stat.logSlowSql: true
+        config.decrypt: true
+        config.decrypt.key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAL3Yxh3nOsx6HlPEi2zXXjUdAUBpDUw9cEOwdnpqbp5YIIkkr1YTtLLOvI0uq5u9y9WhDGrf4DnpwtR36p/OwTUCAwEAAQ==
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    log-impl:  org.apache.ibatis.logging.stdout.StdOutImpl
+  #    逻辑删除
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+# JWT配置
+jwt:
+  secret: 123456 # JWT密钥
+  expiration: 86400 # JWT过期时间，单位为秒
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
+
+
+# 项目内自定义配置
+config:
+  # 文件上传路径
+  uploadDir: /Users/wudiguang/wudiguang/github/project/renting-backend/images/
+  # 文件上传后访问域名
+  domain: http://localhost:5500/

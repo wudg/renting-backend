@@ -60,7 +60,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             throw new BadCredentialsException("密码不正确");
         }
         // 生成JWT并返回
-        return jwtUtils.generateToken(user.getUsername());
+        return JwtUtils.generateToken(user.getUsername());
     }
 
     /**

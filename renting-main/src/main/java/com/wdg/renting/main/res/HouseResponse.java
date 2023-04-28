@@ -1,7 +1,5 @@
 package com.wdg.renting.main.res;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -58,6 +56,11 @@ public class HouseResponse {
     private BigDecimal price;
 
     /**
+     * 朝向
+     */
+    private String toward;
+
+    /**
      * 图片
      */
     private String images;
@@ -75,7 +78,7 @@ public class HouseResponse {
     /**
      * 出租方式
      */
-    private String rentalMethod;
+    private Boolean rentalMethod;
 
     /**
      * 厨房
@@ -120,12 +123,10 @@ public class HouseResponse {
     /**
      * 创建时间
      */
-    @TableField(fill = FieldFill.INSERT)
-    private Long createTime;
+    private String createTime;
 
     /**
      * 更新时间
      */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateTime;
+    private String updateTime;
 }
