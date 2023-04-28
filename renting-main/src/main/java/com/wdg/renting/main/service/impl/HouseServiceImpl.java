@@ -73,6 +73,7 @@ public class HouseServiceImpl extends BaseServiceImpl<HouseMapper, House> implem
                 .setPrice(house.getPrice())
                 .setCover(house.getCover())
                 .setVillageName(house.getVillageName())
+                .setRentalMethod(house.getRentalMethod())
                 .setLevel(house.getLevel())
                 .setToward(house.getToward())
                 .setBalcony(house.getBalcony())
@@ -90,8 +91,8 @@ public class HouseServiceImpl extends BaseServiceImpl<HouseMapper, House> implem
                 .setHouseNo(house.getHouseNo())
                 .setPowerRate(house.getPowerRate())
                 .setWaterRate(house.getWaterRate())
-                .setRegionId(house.getLocation().get(1))
-                .setDistrictId(house.getLocation().get(0))
+                .setRegionId(house.getRegionLocation().get(1))
+                .setDistrictId(house.getRegionLocation().get(0))
                 .setSubwayLineId(house.getSubwayLocation().get(0))
                 .setSubwayStationId(house.getSubwayLocation().get(1));
         houseDetailService.save(houseDetail);

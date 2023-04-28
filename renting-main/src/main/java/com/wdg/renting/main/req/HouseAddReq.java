@@ -60,7 +60,7 @@ public class HouseAddReq {
     /**
      * 区域ID
      */
-    private List<Long> location;
+    private List<Long> regionLocation;
 
     /**
      * 地铁ID
